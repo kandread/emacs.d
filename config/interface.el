@@ -25,3 +25,15 @@
 
 ;; Wrap lines visually for all buffers
 (global-visual-line-mode 1)
+
+;; Display available keybindings in popup
+(use-package which-key
+  :hook (after-init . which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-sort-order #'which-key-prefix-then-key-order
+        which-key-sort-uppercase-first nil
+        which-key-add-column-padding 1
+        which-key-min-display-lines 5
+        which-key-idle-delay 0.5)
+  (which-key-setup-side-window-bottom))
