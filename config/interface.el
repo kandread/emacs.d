@@ -22,3 +22,6 @@
 
 ;; Make it easier to answer yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Wrap lines visually for all buffers
+(global-visual-line-mode 1)
