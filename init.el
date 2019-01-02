@@ -81,6 +81,16 @@
 (require 'bind-key) ; needed to load compiled init.el
 (use-package diminish :demand t)
 
+;; Load modular configurations
+(defvar emacs-config-directory (expand-file-name "config" user-emacs-directory)
+  "Path to modular configuration files.")
+
+(defvar emacs-modules-to-load
+  '())
+
+(dolist (p emacs-modules-to-load)
+  (load (concat emacs-config-directory (format "/%s" p))))
+
 ;; Let's lower our GC thresholds back down to a sane level
 (setq gc-cons-threshold 16777216
       gc-cons-percentage 0.1
