@@ -43,3 +43,10 @@
 
 ;; Select a theme
 (load-theme 'doom-sourcerer t)
+
+;; Use a better modeline
+(use-package doom-modeline
+  :hook
+  (after-init . doom-modeline-init)
+  :config
+  (setq doom-modeline-major-mode-icon nil))
