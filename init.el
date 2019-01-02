@@ -13,6 +13,10 @@
 (defvar doom--file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
+;; Move custom settings into its own file
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file t t)
+
 
 ;; Let's lower our GC thresholds back down to a sane level
 (setq gc-cons-threshold 16777216
