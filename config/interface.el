@@ -37,3 +37,9 @@
         which-key-min-display-lines 5
         which-key-idle-delay 0.5)
   (which-key-setup-side-window-bottom))
+
+;; Load themes
+(use-package doom-themes :demand t)
+
+;; Select a theme
+(load-theme 'doom-sourcerer t)
