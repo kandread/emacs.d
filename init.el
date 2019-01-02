@@ -86,7 +86,8 @@
   "Path to modular configuration files.")
 
 (defvar emacs-modules-to-load
-  '(macos))
+  '(macos
+    interface))
 
 (dolist (p emacs-modules-to-load)
   (load (concat emacs-config-directory (format "/%s" p))))
