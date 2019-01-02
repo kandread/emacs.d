@@ -17,6 +17,11 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file t t)
 
+;; History & backup settings (save nothing, that's what git is for)
+(setq auto-save-default nil
+      create-lockfiles nil
+      history-length 500
+      make-backup-files nil)
 
 ;; Let's lower our GC thresholds back down to a sane level
 (setq gc-cons-threshold 16777216
