@@ -73,6 +73,14 @@
   (require 'quelpa-use-package)
   (setq use-package-always-ensure t))
 
+;; Ensure ELPA org is prioritized above built-in org.
+(require 'cl)
+(setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
+
+;; Some core packages
+(require 'bind-key) ; needed to load compiled init.el
+(use-package diminish :demand t)
+
 ;; Let's lower our GC thresholds back down to a sane level
 (setq gc-cons-threshold 16777216
       gc-cons-percentage 0.1
