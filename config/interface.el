@@ -56,3 +56,12 @@
   "When running `quit-window', always kill the buffer."
   (ad-set-arg 0 t))
 (ad-activate 'quit-window)
+
+;; Enable scrolling in compilation window until first error
+(setq compilation-scroll-output 'first-error)
+
+;; Turn on ANSI color interpretation in compilation buffers
+(defun +interface/colorize-compilation-buffer ()
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook #'+interface/colorize-compilation-buffer)
