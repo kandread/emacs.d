@@ -50,3 +50,9 @@
   (after-init . doom-modeline-init)
   :config
   (setq doom-modeline-major-mode-icon nil))
+
+;; Let's kill buffer instead of just burying when quitting a window
+(defadvice quit-window (before kill-buffer-and-window)
+  "When running `quit-window', always kill the buffer."
+  (ad-set-arg 0 t))
+(ad-activate 'quit-window)
