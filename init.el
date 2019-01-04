@@ -87,7 +87,14 @@
 
 (defvar emacs-modules-to-load
   '(macos
-    interface))
+    editor
+    completion
+    interface
+    version-control
+    org
+    python
+    email
+    ))
 
 (dolist (p emacs-modules-to-load)
   (load (concat emacs-config-directory (format "/%s" p))))
