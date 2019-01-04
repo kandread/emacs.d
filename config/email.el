@@ -8,8 +8,9 @@
   (provide 'html2text)
   :bind ("C-x m" . mu4e)
   :config
-  (require 'mu4e-maildirs-extension)
-  (mu4e-maildirs-extension-load)
+  (require 'org-mu4e)
+  (dolist (mm '(mu4e-headers-mode-map mu4e-view-mode-map))
+    (bind-keys :map (symbol-value mm) ("c" . org-mu4e-store-and-capture))) 
   (set-face-attribute 'mu4e-replied-face nil :inherit 'mu4e-header-face)
   (setq mu4e-maildir (expand-file-name "~/Mail/umass")
         mu4e-attachment-dir "~/Downloads"
@@ -41,7 +42,8 @@
 ;; Show how many messages there are in each mailbox
 (use-package mu4e-maildirs-extension
   :after mu4e
-  ;; :init (with-eval-after-load 'mu4e (mu4e-maildirs-extension-load))
+  :init
+  (mu4e-maildirs-extension-load)
   :config
   (setq mu4e-maildirs-extension-title nil
         mu4e-maildirs-extension-action-text "\t[u] Update mail and index\n"
