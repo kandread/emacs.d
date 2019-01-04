@@ -47,4 +47,4 @@
   :config
   (setq company-idle-delay 0
 	company-minimum-prefix-length 3)
-  (global-company-mode))
+  (add-hook 'prog-mode-hook #'company-mode))
