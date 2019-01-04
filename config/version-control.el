@@ -6,37 +6,17 @@
   :bind (("C-x g" . magit-status))
   :config
   (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
-	magit-diff-refine-hunk t ; show word-granularity on selected hunk
-	magit-completing-read-function #'ivy-completing-read)
+    magit-diff-refine-hunk t ; show word-granularity on selected hunk
+    magit-completing-read-function #'ivy-completing-read)
   ;; properly kill leftover magit buffers on quit
   (define-key magit-status-mode-map [remap magit-mode-bury-buffer] #'+version-control/magit-quit))
 
-;; Kill Magit buffer
-(defun +version-control/magit-kill-buffer (buf)
-  "Kill Magit buffer."
-  (when (and (bufferp buf) (buffer-live-p buf))
-    (let ((process (get-buffer-process buf)))
-      (if (not (processp process))
-          (kill-buffer buf)
-        (with-current-buffer buf
-          (if (process-live-p process)
-              (run-with-timer 5 nil #'+version-control/magit-kill-buffer buf)
-            (kill-process process)
-	    (kill-buffer buf)))))))
-
-;; Clean up Magit buffers
-(defun +version-control/magit-quit (&optional _kill-buffer)
-  "Clean up magit buffers after quitting `magit-status'."
+(defun +version-control/magit-quit ()
+  "Clean up all Magit buffers after quitting."
   (interactive)
-  (quit-window)
-  (delete-window)
-  (unless (cdr
-           (delq nil
-                 (mapcar (lambda (win)
-                           (with-selected-window win
-			     (eq major-mode 'magit-status-mode)))
-                         (window-list))))
-    (mapc #'+version-control/magit-kill-buffer (magit-mode-get-buffers))))
+  (let ((buffers (magit-mode-get-buffers)))
+    (magit-restore-window-configuration)
+    (mapc #'kill-buffer buffers)))
 
 ;; Highlight uncommitted changes in fringe
 (defun +version-control/enable-git-gutter ()
