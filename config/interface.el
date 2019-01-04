@@ -23,6 +23,9 @@
 ;; Make it easier to answer yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Focus help window
+(setq help-window-select t)
+
 ;; Wrap lines visually for all buffers
 (global-visual-line-mode 1)
 
