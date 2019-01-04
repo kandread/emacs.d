@@ -65,3 +65,11 @@
   (let ((inhibit-read-only t))
     (ansi-color-apply-on-region (point-min) (point-max))))
 (add-hook 'compilation-filter-hook #'+interface/colorize-compilation-buffer)
+
+;; Easily select window to switch to
+(use-package ace-window
+  :bind ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+    aw-scope 'frame
+    aw-background t))
