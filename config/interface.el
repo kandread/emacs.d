@@ -76,3 +76,7 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
     aw-scope 'frame
     aw-background t))
+
+;; Easily follow links
+(use-package ace-link
+  :commands (ace-link-mu4e))

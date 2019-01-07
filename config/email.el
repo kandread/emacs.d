@@ -10,7 +10,8 @@
   :config
   (require 'org-mu4e)
   (dolist (mm '(mu4e-headers-mode-map mu4e-view-mode-map))
-    (bind-keys :map (symbol-value mm) ("c" . org-mu4e-store-and-capture))) 
+    (bind-keys :map (symbol-value mm) ("c" . org-mu4e-store-and-capture)))
+  (bind-keys :map 'mu4e-view-mode-map ("l" . ace-link-mu4e))
   (set-face-attribute 'mu4e-replied-face nil :inherit 'mu4e-header-face)
   (setq mu4e-maildir (expand-file-name "~/Mail/umass")
         mu4e-attachment-dir "~/Downloads"
