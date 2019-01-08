@@ -28,6 +28,10 @@
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((python . t)))
+  ;; use return to open links
+  (setq org-return-follows-link t)
+  ;; load org-mu4e to handle email links
+  (require 'org-mu4e)
   ;; set org file directory
   (setq org-files-directory "~/Documents/Org/")
   ;; set agenda files
