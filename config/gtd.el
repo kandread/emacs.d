@@ -3,7 +3,11 @@
 ;; Org-mode
 (use-package org
   :ensure org-plus-contrib
-  :bind ("C-x c" . org-capture)
+  :init
+  ;; set up keybindings
+  (bind-keys
+    ("C-x c" . org-capture)
+    ("C-x C-a" . org-agenda))
   :config
   ;; set up interface
   (setq-default
