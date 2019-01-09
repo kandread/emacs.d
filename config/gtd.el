@@ -146,7 +146,7 @@
   (org-map-entries #'+gtd/delete-all-done-entries nil '("~/Documents/Org/email.org"))
   (save-some-buffers 'no-confirm (equal buffer-file-name "email.org")))
 
-(defun +gtd/clock-in-to-next ()
+(defun +gtd/clock-in-to-next (kw)
   "Switch a task from TODO to NEXT when clocking in"
   (when (not (and (boundp 'org-capture-mode) org-capture-mode))
     (if (member (org-get-todo-state) (list "TODO")) "NEXT")))
