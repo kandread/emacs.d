@@ -2,7 +2,6 @@
 
 ;; Org-mode
 (use-package org
-  :demand t
   :ensure org-plus-contrib
   :bind ("C-x c" . org-capture)
   :config
@@ -37,7 +36,7 @@
   ;; set agenda files
   (setq org-agenda-files (list org-files-directory))
   ;; set default notes file
-  (setq org-default-notes-file (expand-file-name "notes.org" org-files-directory))
+    (setq org-default-notes-file (expand-file-name "notes.org" org-files-directory))
   ;; set capture templates
   (setq org-capture-templates
     `(("r" "respond" entry (file ,(expand-file-name "email.org" org-files-directory))
@@ -74,16 +73,24 @@
   ;; show refile targets simultaneously
   (setq org-outline-path-complete-in-steps nil)
   ;; use full outline paths for refile targets
-  (setq org-refile-use-outline-path 'file)
+    (setq org-refile-use-outline-path 'file)
   ;; allow refile to create parent tasks with confirmation
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   ;; exclude done tasks from refile targets
-  (setq org-refile-target-verify-function #'+org/verify-refile-target))
+  (setq org-refile-target-verify-function #'+gtd/verify-refile-target)
+  ;; include agenda archive files when searching for things
+  (setq org-agenda-text-search-extra-files '(agenda-archives))
+  ;; show agenda as the only window
+  (setq org-agenda-window-setup 'only-window)
+  ;; define stuck projects
+  (setq org-stuck-projects '("+project-done/-TODO" ("NEXT" "WAITING")))
+  ;; exclude archived tasks from agenda view
+  (setq org-agenda-tag-filter-preset '("-archive")))
 
 ;; Export libraries
 (use-package htmlize)
 
 ;; Functions
-(defun +org/verify-refile-target ()
+(defun +gtd/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))

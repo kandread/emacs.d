@@ -92,7 +92,7 @@
      interface
      version-control
      spellcheck
-     org
+     gtd
      python
      email
      ))
