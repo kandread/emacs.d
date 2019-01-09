@@ -15,3 +15,6 @@
 
 ;; Fix Lisp indent offset
 (setq lisp-indent-offset 2)
+
+;; Save place in file between sessions
+(save-place-mode 1)
