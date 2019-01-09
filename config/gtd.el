@@ -36,7 +36,7 @@
   ;; set agenda files
   (setq org-agenda-files (list org-files-directory))
   ;; set default notes file
-    (setq org-default-notes-file (expand-file-name "notes.org" org-files-directory))
+  (setq org-default-notes-file (expand-file-name "notes.org" org-files-directory))
   ;; set capture templates
   (setq org-capture-templates
     `(("r" "respond" entry (file ,(expand-file-name "email.org" org-files-directory))
@@ -73,7 +73,7 @@
   ;; show refile targets simultaneously
   (setq org-outline-path-complete-in-steps nil)
   ;; use full outline paths for refile targets
-    (setq org-refile-use-outline-path 'file)
+  (setq org-refile-use-outline-path 'file)
   ;; allow refile to create parent tasks with confirmation
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   ;; exclude done tasks from refile targets
@@ -85,7 +85,43 @@
   ;; define stuck projects
   (setq org-stuck-projects '("+project-done/-TODO" ("NEXT" "WAITING")))
   ;; exclude archived tasks from agenda view
-  (setq org-agenda-tag-filter-preset '("-archive")))
+  (setq org-agenda-tag-filter-preset '("-archive"))
+  ;; disable compact block agenda view
+  (setq org-agenda-compact-blocks nil)
+  ;; block tasks that have unfinished subtasks
+  (setq org-enforce-todo-dependencies t)
+  ;; dim blocked tasks in agenda
+  (setq org-agenda-dim-blocked-tasks t)
+  ;; inhibit startup when preparing agenda buffer
+  (setq org-agenda-inhibit-startup nil)
+  ;; limit number of days before showing a future deadline
+  (setq org-deadline-warning-days 7)
+  ;; retain ignore options in tags-todo search
+  (setq org-agenda-tags-todo-honor-ignore-options t)
+  ;; hide certain tags from agenda view
+  (setq org-agenda-hide-tags-regexp "project\\|started")
+  ;; remove completed deadline tasks from the agenda view
+  (setq org-agenda-skip-deadline-if-done t)
+  ;; remove completed scheduled tasks from the agenda view
+  (setq org-agenda-skip-scheduled-if-done t)
+  ;; remove completed items from search results
+  (setq org-agenda-skip-timestamp-if-done t)
+  ;; perform actions before finalizing agenda view
+  (add-hook 'org-agenda-finalize-hook #'+gtd/cleanup-replied-emails)
+  ;; resume clocking when emacs is restarted
+  (org-clock-persistence-insinuate)
+  ;; change tasks to NEXT when clocking in
+  (setq org-clock-in-switch-to-state #'+gtd/clock-in-to-next)
+  ;; separate drawers for clocking and logs
+  (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+  ;; clock out when moving task to a done state
+  (setq org-clock-out-when-done t)
+  ;; save the running clock and all clock history when exiting Emacs, load it on startup
+  (setq org-clock-persist t)
+  ;; do not prompt to resume an active clock
+  (setq org-clock-persist-query-resume nil)
+  ;; enable auto clock resolution for finding open clocks
+  (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running)))
 
 ;; Export libraries
 (use-package htmlize)
@@ -94,3 +130,23 @@
 (defun +gtd/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
+(defun +gtd/delete-all-done-entries ()
+  "Archive all entries marked DONE"
+  (interactive)
+  (save-excursion
+    (goto-char (point-max))
+    (while (outline-previous-heading)
+      (when (org-entry-is-done-p)
+	(org-cut-subtree)))))
+
+(defun +gtd/cleanup-replied-emails ()
+  "Clean up email tasks that have been replied (i.e. marked done)"
+  (interactive)
+  (org-map-entries #'+gtd/delete-all-done-entries nil '("~/Documents/Org/email.org"))
+  (save-some-buffers 'no-confirm (equal buffer-file-name "email.org")))
+
+(defun +gtd/clock-in-to-next ()
+  "Switch a task from TODO to NEXT when clocking in"
+  (when (not (and (boundp 'org-capture-mode) org-capture-mode))
+    (if (member (org-get-todo-state) (list "TODO")) "NEXT")))
