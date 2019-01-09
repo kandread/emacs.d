@@ -49,6 +49,7 @@
 
 ;; Use a better modeline
 (use-package doom-modeline
+  :defer t
   :hook
   (after-init . doom-modeline-init)
   :config
