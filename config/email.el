@@ -43,9 +43,9 @@
 ;; Show how many messages there are in each mailbox
 (use-package mu4e-maildirs-extension
   :after mu4e
-  :init
-  (mu4e-maildirs-extension-load)
+  :demand t
   :config
+  (mu4e-maildirs-extension-load)
   (setq mu4e-maildirs-extension-title nil
         mu4e-maildirs-extension-action-text "\t[u] Update mail and index\n"
         mu4e-maildirs-extension-maildir-expanded-prefix "-"
