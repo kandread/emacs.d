@@ -123,6 +123,11 @@
   ;; enable auto clock resolution for finding open clocks
   (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running)))
 
+;; Pomodoro technique for org mode
+(use-package org-pomodoro
+  :commands org-pomodoro
+  :bind ("C-c C-x m" . org-pomodoro))
+
 ;; Export libraries
 (use-package htmlize)
 
