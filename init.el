@@ -92,6 +92,7 @@
      interface
      version-control
      spellcheck
+     modes
      gtd
      python
      email
