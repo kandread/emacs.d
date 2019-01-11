@@ -10,6 +10,9 @@
 (with-eval-after-load 'ispell
   (add-to-list 'ispell-extra-args "--sug-mode=ultra"))
 
+;; Enable spell check in text modes
+(add-hook 'text-mode-hook #'turn-on-flyspell)
+
 ;; Distraction-free words correction
 (use-package flyspell-correct
   :ensure flyspell-correct-ivy
