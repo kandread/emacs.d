@@ -132,6 +132,14 @@
   :commands org-pomodoro
   :bind ("C-c C-x m" . org-pomodoro))
 
+;; Sync calendar with org mode
+(use-package org-gcal
+  :commands (org-gcal-fetch)
+  :config
+  (setq org-gcal-client-id "387490352247-km265vil3bvcvaf6g69j24arla3tr1to.apps.googleusercontent.com"
+    org-gcal-client-secret "MWRWx2qELRugHIcYwxHXtAro"
+    org-gcal-file-alist '(("kmandreadis@gmail.com" . "~/Documents/Org/meetings.org"))))
+
 ;; Export libraries
 (use-package htmlize)
 
