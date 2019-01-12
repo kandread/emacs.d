@@ -13,6 +13,10 @@
           ("M-g l" . avy-goto-line)
           ("M-g w" . avy-goto-word-1)))
 
+;; Expand region semantically
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+
 ;; Fix Lisp indent offset
 (setq lisp-indent-offset 2)
 
