@@ -92,6 +92,7 @@
      interface
      version-control
      spellcheck
+     syntaxcheck
      modes
      gtd
      python
