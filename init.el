@@ -93,6 +93,7 @@
      version-control
      spellcheck
      syntaxcheck
+     project
      modes
      gtd
      python
