@@ -30,3 +30,6 @@
     undo-tree-enable-undo-in-region nil
     undo-tree-history-directory-alist '(("." . "~/.emacs.d/cache/undo")))
   (global-undo-tree-mode +1))
+
+;; turn on line numbers for programming modes
+(add-hook 'prog-mode-hook #'display-line-numbers--turn-on)
