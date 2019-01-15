@@ -22,3 +22,11 @@
 
 ;; Save place in file between sessions
 (save-place-mode 1)
+
+;; Undo/redo functionality
+(use-package undo-tree
+  :config
+  (setq undo-tree-auto-save-history t
+    undo-tree-enable-undo-in-region nil
+    undo-tree-history-directory-alist '(("." . "~/.emacs.d/cache/undo")))
+  (global-undo-tree-mode +1))
