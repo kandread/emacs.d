@@ -32,4 +32,4 @@
   (global-undo-tree-mode +1))
 
 ;; turn on line numbers for programming modes
-(add-hook 'prog-mode-hook #'display-line-numbers--turn-on)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
