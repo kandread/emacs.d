@@ -31,6 +31,8 @@
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((python . t)))
+  ;; do not ask for confirmation when evaluating code
+  (setq org-confirm-babel-evaluate nil)
   ;; use return to open links
   (setq org-return-follows-link t)
   ;; load org-mu4e to handle email links
