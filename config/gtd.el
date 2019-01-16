@@ -143,6 +143,12 @@
 ;; Export libraries
 (use-package htmlize)
 
+(use-package ox-pandoc
+  :init
+  (with-eval-after-load 'org (require 'ox-pandoc))
+  :config
+  (push 'pandoc org-export-backends))
+
 ;; Functions
 (defun +gtd/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
