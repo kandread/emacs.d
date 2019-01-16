@@ -149,6 +149,13 @@
   :config
   (push 'pandoc org-export-backends))
 
+(use-package ox-reveal
+  :init
+  (with-eval-after-load 'org (require 'ox-reveal))
+  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
+    ;; org-reveal-root "file:///Users/kandread/.emacs.d/reveal.js"
+    org-reveal-mathjax t))
+
 ;; Functions
 (defun +gtd/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
