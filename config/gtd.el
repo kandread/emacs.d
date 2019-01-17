@@ -30,7 +30,9 @@
   ;; configure programming language support
   (org-babel-do-load-languages
     'org-babel-load-languages
-    '((python . t)))
+    '((emacs-lisp . t)
+       (jupyter . t)
+       (python . t)))
   ;; do not ask for confirmation when evaluating code
   (setq org-confirm-babel-evaluate nil)
   ;; use return to open links

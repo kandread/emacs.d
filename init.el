@@ -97,6 +97,7 @@
      modes
      gtd
      python
+     jupyter
      email
      ))
 
