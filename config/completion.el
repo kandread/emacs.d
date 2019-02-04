@@ -48,3 +48,20 @@
   (setq company-idle-delay 0
 	company-minimum-prefix-length 3)
   (add-hook 'prog-mode-hook #'company-mode))
+
+;; Snippets
+(use-package yasnippet
+  :commands (yas-minor-mode yas-minor-mode-on yas-expand yas-expand-snippet
+             yas-lookup-snippet yas-insert-snippet yas-new-snippet
+	      yas-visit-snippet-file snippet-mode)
+  :init
+  (add-hook 'prog-mode-hook #'yas-minor-mode-on)
+  (add-hook 'text-mode-hook #'yas-minor-mode-on)
+  :config
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "C-'") #'yas-expand)
+  (setq yas-verbosity 1
+    yas-wrap-around-region t))
+
+(use-package yasnippet-snippets)
+
