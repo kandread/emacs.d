@@ -32,7 +32,11 @@
     'org-babel-load-languages
     '((emacs-lisp . t)
        (jupyter . t)
+       (ipython . t)
        (python . t)))
+  ;; Use HTML5 when exporting
+  (setq org-html-html5-fancy t
+    org-html-doctype "html5")
   ;; do not ask for confirmation when evaluating code
   (setq org-confirm-babel-evaluate nil)
   ;; use return to open links
@@ -158,15 +162,21 @@
   (with-eval-after-load 'org (require 'ox-reveal))
   (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
     ;; org-reveal-root "file:///Users/kandread/.emacs.d/reveal.js"
+    org-reveal-note-key-char nil
     org-reveal-mathjax t))
+
+(use-package ox-ipynb
+  :quelpa (ox-ipynb :fetcher github :repo "jkitchin/ox-ipynb")
+  :init
+  (with-eval-after-load 'org (require 'ox-ipynb)))
 
 ;; Functions
 (defun +gtd/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets"
+  "Exclude todo keywords with a done state from refile targets."
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
 (defun +gtd/delete-all-done-entries ()
-  "Archive all entries marked DONE"
+  "Archive all entries marked DONE."
   (interactive)
   (save-excursion
     (goto-char (point-max))
@@ -175,12 +185,12 @@
 	(org-cut-subtree)))))
 
 (defun +gtd/cleanup-replied-emails ()
-  "Clean up email tasks that have been replied (i.e. marked done)"
+  "Clean up email tasks that have been replied (i.e. marked done)."
   (interactive)
   (org-map-entries #'+gtd/delete-all-done-entries nil '("~/Documents/Org/email.org"))
   (save-some-buffers 'no-confirm (equal buffer-file-name "email.org")))
 
 (defun +gtd/clock-in-to-next (kw)
-  "Switch a task from TODO to NEXT when clocking in"
+  "Switch a task from TODO to NEXT when clocking in."
   (when (not (and (boundp 'org-capture-mode) org-capture-mode))
     (if (member (org-get-todo-state) (list "TODO")) "NEXT")))
