@@ -98,6 +98,7 @@
      gtd
      python
      jupyter
+     julia
      email
      ))
 
