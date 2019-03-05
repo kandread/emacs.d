@@ -99,6 +99,7 @@
      python
      jupyter
      julia
+     writing
      email
      ))
 
