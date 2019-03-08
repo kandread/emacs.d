@@ -22,7 +22,7 @@
     mu4e-index-lazy-check t ; don't consider up-to-date dirs
     message-kill-buffer-on-exit t
     mu4e-headers-skip-duplicates t
-    mu4e-compose-format-flowed 
+    mu4e-compose-format-flowed t
     mu4e-confirm-quit nil ; quit without asking
     mu4e-compose-dont-reply-to-self t)
   (setq mu4e-bookmarks
