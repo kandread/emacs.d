@@ -27,6 +27,9 @@
     org-indent-indentation-per-level 2
     org-indent-mode-turns-on-hiding-stars t
     org-list-description-max-indent 4)
+  ;; ignore headings during export using tag
+  (require 'ox-extra)
+  (ox-extras-activate '(ignore-headlines))
   ;; configure programming language support
   (org-babel-do-load-languages
     'org-babel-load-languages
