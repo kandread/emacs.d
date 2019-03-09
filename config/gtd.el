@@ -162,7 +162,19 @@
     org-ref-pdf-directory "~/Documents/Papers/"
     org-ref-completion-library 'org-ref-ivy-cite)
   :config
-  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")))
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+  (setq org-ref-note-title-format
+    "* %t
+     :PROPERTIES:
+     :Custom_ID: %k
+     :AUTHOR: %9a
+     :JOURNAL: %j
+     :YEAR: %y
+     :DOI: %D
+     :URL: %U
+     :END:
+
+      "))
 
 ;; Export libraries
 (use-package htmlize)
