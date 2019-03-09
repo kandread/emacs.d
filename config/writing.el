@@ -22,3 +22,14 @@
     ;; automatically insert braces after sub/superscript in math mode
     TeX-electric-sub-and-superscript t)
   (setq-local ispell-parser 'tex))
+
+(use-package auctex-latexmk
+  :after tex
+  :init
+  ;; pass the -pdf flag when TeX-PDF-mode is active
+  (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+  ;; set LatexMk as the default
+  (setq TeX-command-default "LatexMk")
+  :config
+  ;; add latexmk as a TeX target
+  (auctex-latexmk-setup))
