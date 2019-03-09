@@ -151,6 +151,19 @@
     org-gcal-client-secret "MWRWx2qELRugHIcYwxHXtAro"
     org-gcal-file-alist '(("kmandreadis@gmail.com" . "~/Documents/Org/meetings.org"))))
 
+;; Manage bibliography with org mode
+(use-package org-ref
+  :after org
+  :demand t
+  :init
+  (setq reftex-default-bibliography '("~/Documents/library.bib")
+    org-ref-bibliography-notes "~/Documents/Org/notes.org"
+    org-ref-default-bibliography "~/Documents/library.bib"
+    org-ref-pdf-directory "~/Documents/Papers/"
+    org-ref-completion-library 'org-ref-ivy-cite)
+  :config
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")))
+
 ;; Export libraries
 (use-package htmlize)
 
