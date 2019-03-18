@@ -33,3 +33,9 @@
 
 ;; turn on line numbers for programming modes
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
+;; merge with system clipboard
+(setq select-enable-clipboard t)
+
+;; automatically pair delimiters
+(electric-pair-mode +1)
