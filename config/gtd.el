@@ -162,8 +162,10 @@
     org-ref-pdf-directory "~/Documents/Papers/"
     org-ref-completion-library 'org-ref-ivy-cite)
   :config
-  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
-  (setq org-ref-note-title-format
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
+    org-ref-get-pdf-filename-function #'org-ref-get-pdf-filename-helm-bibtex
+    bibtex-completion-pdf-field "file"
+    org-ref-note-title-format
     "* %t
      :PROPERTIES:
      :Custom_ID: %k
