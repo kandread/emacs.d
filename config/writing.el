@@ -33,3 +33,11 @@
   :config
   ;; add latexmk as a TeX target
   (auctex-latexmk-setup))
+
+(use-package ivy-bibtex
+  :commands ivy-bibtex
+  :bind (:map bibtex-mode-map
+	  ("C-c v" . ivy-bibtex))
+  :config
+  (setq bibtex-completion-bibliography '("~/Documents/library.bib")
+    bibtex-completion-pdf-field "file"))
