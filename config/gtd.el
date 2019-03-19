@@ -151,6 +151,15 @@
     org-gcal-client-secret "MWRWx2qELRugHIcYwxHXtAro"
     org-gcal-file-alist '(("kmandreadis@gmail.com" . "~/Documents/Org/meetings.org"))))
 
+;; Use calendar views
+(use-package calfw
+  :commands cfw:open-calendar-buffer)
+
+(use-package calfw-org
+  :commands (cfw:open-org-calendar cfw:org-create-source)
+  :config
+  (setq cfw:org-agenda-schedule-args '(:timestamp)))
+
 ;; Manage bibliography with org mode
 (use-package org-ref
   :after org
