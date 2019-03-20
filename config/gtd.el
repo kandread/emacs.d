@@ -158,7 +158,7 @@
 (use-package calfw-org
   :commands (cfw:open-org-calendar cfw:org-create-source)
   :config
-  (setq cfw:org-agenda-schedule-args '(:timestamp)))
+  (setq cfw:org-agenda-schedule-args nil))
 
 ;; Manage bibliography with org mode
 (use-package org-ref
